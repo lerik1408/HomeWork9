@@ -4,6 +4,7 @@ const ctrl = require('./controllers')
 const router =new Router();
 
 router.get('index',ctrl.homePage);
+router.get('',ctrl.homePage);
 router.get('siginIn',ctrl.siginInPage);
 router.get('passwordRecovery',ctrl.passwordRecoveryPage)
 router.get('passwordRecovery1',ctrl.passwordRecovery1Page)
