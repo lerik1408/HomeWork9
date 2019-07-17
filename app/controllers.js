@@ -1,7 +1,5 @@
 exports.homePage = async (ctx) => {
-    await ctx.render('index',{
-        user: "John"
-    })
+    await ctx.render('index.njk')
 }
 exports.siginInPage = async (ctx) => {
     await ctx.render('siginIn.njk',{
