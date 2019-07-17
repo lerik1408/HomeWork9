@@ -1,0 +1,44 @@
+{%macro people(user)%}
+    <div class="people__item">
+        <img src={{user.img}} class="people__img"alt="face">
+        <div class="people__content">
+            <div class="people__headline">
+                <p class="people__name">{{user.name}}</p>
+                <span class="people__rating">
+                    {%if user.rating=="gold"%}
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.6001 4.46828L7.89075 3.68539L6.0001 0.399658V9.50435L9.461 11.0514L9.05928 7.28169L11.6001 4.46828Z" fill="#F9C800"/>
+                            <path d="M4.10935 3.68576L0.400002 4.46865L2.94083 7.28205L2.5391 11.0517L6 9.50472V0.400024L4.10935 3.68576Z" fill="#FFE060"/>
+                        </svg>
+                    {%elif user.rating=="silver"%}
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 5.08578L9.36331 4.10717L7 1.27847e-08V11.3809L11.3261 13.3146L10.824 8.60254L14 5.08578Z" fill="#B8B6B6"/>
+                            <path d="M4.63669 4.10717L0 5.08578L3.17603 8.60254L2.67387 13.3146L7 11.3809V1.27847e-08L4.63669 4.10717Z" fill="#D4D4D4"/>
+                        </svg>
+                    {%elif user.rating=="bronze"%}
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.6001 4.46828L7.89075 3.68539L6.0001 0.399658V9.50435L9.461 11.0514L9.05928 7.28169L11.6001 4.46828Z" fill="#D86F0F"/>
+                            <path d="M4.10935 3.68576L0.400002 4.46865L2.94083 7.28205L2.5391 11.0517L6 9.50472V0.400024L4.10935 3.68576Z" fill="#FB9E48"/>
+                        </svg>
+
+                        {%endif%}
+                    </span>
+                </div>
+                <div class="people__position">
+                    <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.49985 0C1.57013 0 3.63724e-08 1.57013 3.63724e-08 3.50005C3.63724e-08 4.00345 0.103034 4.48408 0.306086 4.92871C1.18115 6.84355 2.85888 8.86522 3.35236 9.43916C3.38933 9.48207 3.44323 9.50678 3.49995 9.50678C3.55667 9.50678 3.61057 9.48207 3.64755 9.43916C4.14083 8.86532 5.81856 6.84375 6.69391 4.92871C6.89706 4.48408 7 4.00345 7 3.50005C6.99981 1.57013 5.42968 0 3.49985 0ZM3.49985 5.31799C2.49744 5.31799 1.68182 4.50237 1.68182 3.49995C1.68182 2.49744 2.49744 1.68182 3.49985 1.68182C4.50227 1.68182 5.31789 2.49744 5.31789 3.49995C5.31798 4.50237 4.50237 5.31799 3.49985 5.31799Z" fill="#2A74DB"/>
+                    </svg>
+                    <p class="country">{{user.country}}</p>
+                </div>
+                <div class="people__stack stack">
+                    <p class="stack__stack">Stack: </p>
+                    <p class="stack__skills">{{user.skills}}</p>
+                    <a href="#" class="stack__link">More</a>
+                </div>
+                <div class="people__price price">
+                    <p class="price__text">Base Daily Rate:</p>
+                    <p class="price__price">{{user.price}}</p>
+                </div>
+            </div>
+        </div>
+        {%endmacro%}

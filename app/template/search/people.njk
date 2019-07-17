@@ -1,0 +1,16 @@
+{%import "./macro/macro.njk" as macro %}
+<div class="content">
+    <div class="control">
+        <p class="control-text">SHOW MAP</p>
+        <input type="checkbox" id="price" class="control__checkbox">
+        <label for="price"
+                class="control__label">by price</label>
+        <input type="checkbox" id="rating" class="control__checkbox">
+        <label for="rating" class="control__label">by rating</label>
+    </div>
+    <div class="people">
+        {%for user in people%}
+            {{macro.people(user)}}
+        {%endfor%}
+    </div>
+</div>

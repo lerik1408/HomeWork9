@@ -1,0 +1,18 @@
+{% extends "./app/template/siginUp/base.njk" %}
+{%block link%}
+    <link rel="stylesheet" href="./stylesheet/siginUp.css">
+{%endblock%}
+{%block content%}
+    <div class="main__wrap">
+        <form action="" method="get" class="form">
+            <h3 class="form__headline"> Sign Up</h3>
+            <div class="form__user-name">
+                <input type="text" class="form__input" placeholder="Name">
+                <input type="text" class="form__input" placeholder="Last name">
+            </div>
+            <input type="text" class="form__input" placeholder="E-mail">
+            <input type="text" class="form__input" placeholder="Password">
+            <button class="form__button">Get started</button>
+        </form>
+    </div>
+{%endblock%}

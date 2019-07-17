@@ -1,0 +1,16 @@
+            <section class="nav">
+            {%if title=="Person information"%}
+                <div class="nav__item nav__item--active">
+            {%elif title=="Account information"%}
+                <div class="nav__item">
+            {%endif%}
+                    <a href="personInfo">PERSONAL INFORMATION</a> 
+                </div>
+            {%if title=="Account information"%}
+                <div class="nav__item nav__item--active">
+            {%elif title=="Person information"%}
+                <div class="nav__item">
+            {%endif%}
+                    <a href="accInfo">ACCOUNT INFORMATION</a>
+                </div>
+            </section>

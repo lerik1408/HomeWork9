@@ -1,0 +1,30 @@
+{% extends "./app/template/siginUp/base.njk" %}
+{%block link%}
+    <link rel="stylesheet" href="./stylesheet/siginUp1.css">
+{%endblock%}
+{%block content%}
+    <div class="main__wrap">
+        <form action="" method="get" class="form">
+            <h3 class="form__headline">Complete your account</h3>
+            <input type="text" class="form__input" placeholder="Create a password" id="pass">
+             <div class="bar">
+                <div class="bar__item"></div>
+                <div class="bar__item"></div>
+                <div class="bar__item"></div>
+             </div>
+            <input type="text" class="form__input" placeholder="Confirm password">
+            <div class="checkboxs">
+                <div class="checkbox">
+                    <input type="checkbox" class="input__checkbox" id="agreefirst">
+                    <label for="agreefirst" class="form__label label">agree to the myFixer.com<a href="#" class="label__link">Terms of Service</a></label>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" class="input__checkbox" id="agreesec">
+                    <label for="agreesec" class="form__label label">agree to the myFixer.com<a href="#" class="label__link">Privacy Policy</a></label>
+                </div>
+            </div>
+            <button class="form__button">Get started</button>
+        </form>
+    </div>
+<script src="./script/passCheck.js"></script>
+{%endblock%}

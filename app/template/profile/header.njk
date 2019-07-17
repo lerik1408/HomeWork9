@@ -1,0 +1,30 @@
+<header class="header">
+    <div class="burger">
+        <span class="burger__line"></span>
+     </div>
+    <section class="breadcrumbs">
+        <p class="breadcrumbs__item">Home</p>
+        {%if title=="Search"%}
+            <p class="breadcrumbs__item">Search</p>
+            <p class="breadcrumbs__item">Results</p>
+        {%elif title=="Account information"%}
+            <p class="breadcrumbs__item">My profile</p>
+        {%elif title=="Person information"%}
+            <p class="breadcrumbs__item">My profile</p>
+        {%elif title=="Messenger"%}
+            <p class="breadcrumbs__item">Network</p>
+        {%else%}
+            <p class="breadcrumbs__item">CRASH</p>
+        {%endif%}
+    </section>
+    <section class="header__user user">
+        <p class="user__item">
+            Faruh Bernandez
+        </p>
+        <div class="user__item">
+            <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.2222 1.13514L9.13328 4.85176e-08L5.5555 3.72973L1.97772 4.85176e-08L0.888834 1.13514L5.5555 6L10.2222 1.13514Z" fill="#252F48"/>
+            </svg>
+        </div>
+    </section>
+</header>
