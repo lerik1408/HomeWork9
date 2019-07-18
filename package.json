@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint ./*.js",
-    "fix": "eslint --fix ./*js"
+    "lint": "eslint ./app/*.js",
+    "fix": "eslint --fix ./app/*.js"
   },
   "license": "MIT",
   "devDependencies": {
