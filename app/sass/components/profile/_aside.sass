@@ -1,0 +1,70 @@
+.aside
+  display: flex
+  position: fixed
+  left: 0
+  flex-direction: column
+  align-items: center
+  width: 80px
+  height: 100vh
+  background-color: $navyBlue
+  @include respond_tablet
+    transform: translateX(-80px)
+    transition: 0.3s
+    z-index: 2
+@include respond_tablet
+  .aside--active
+    transform: translateX(-0)
+
+.aside__logo
+  margin-top: 20px
+
+.menu
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+.menu__item
+  margin-top: 50px
+  svg>*
+    fill: $navFill
+
+.menu__item svg:hover>path
+  fill: $lightGreen
+
+.calendar
+  position: relative
+  text-decoration: none
+
+.calendar__alert
+  display: flex
+  position: absolute
+  top: -7px
+  right: -10px
+  align-items: center
+  justify-content: center
+  width: 19px
+  height: 19px
+  border-radius: 50%
+  background-color: $blue
+  text-decoration: none
+
+.calendar__number
+  display: block
+  color: #fff
+  font-size: 12px
+  text-align: center
+
+.menu__item--active
+  position: relative
+  &::before
+    display: block
+    position: absolute
+    position: absolute
+    top: -15px
+    left: -30px
+    width: 4px
+    height: 48px
+    background-color: $lightGreen
+    content: ""
+  svg>*
+    fill: white

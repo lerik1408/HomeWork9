@@ -1,0 +1,212 @@
+main
+  display: flex
+  margin-left: 80px
+  background-color: $grayMain
+  @include respond_tablet
+    margin-left: 0
+
+.main__wrap
+  display: flex
+  width: 90%
+  height: 556px
+  margin: auto
+  margin-top: 25px
+  @include respond_bigTablet
+    width: 100%
+  @include respond_tablet
+    width: 97%
+  border-radius: 4px
+  background-color: #fff
+  box-shadow: 0 0 30px rgba(153, 163, 174, 0.06)
+
+.friends-list
+  border-right: 1px solid $grayBorder
+  @include respond_tablet
+    border-right: 2px solid $grayBorder
+
+.friend
+  display: flex
+  position: relative
+  align-items: center
+  width: 300px
+  height: 90px
+  padding-left: 20px
+  cursor: pointer
+  @include respond_tablet
+    width: auto
+    padding-left: 0
+  
+.friend-active
+  box-shadow: 0 5px 5px rgba(190, 200, 212, 0.2), 0 -5px 5px rgba(224, 224, 224, 0.15)
+.friend__content-wrap
+  margin-left: 14px
+  @include respond_tablet
+    display: none
+
+.friend__name
+  display: inline
+  position: relative
+  color: $navyBlue
+  font-family: $eho
+  font-size: 16px
+  line-height: 30px
+
+.friend:nth-child(2n-1) h3::after
+  display: block
+  position: absolute
+  top: 0
+  right: -10px
+  width: 6px
+  height: 6px
+  border-radius: 50%
+  background-color: $lightGreen
+  content: ""
+
+.friend__status
+  color: $darkBlue
+  font-size: 14px
+  line-height: 18px
+  opacity: 0.43
+
+.friend__time
+  position: absolute
+  top: 10px
+  right: 10px
+  color: $grayTime
+  font-size: 14px
+  @include respond_tablet
+    display: none
+/* CHAT
+
+.chat
+  width: 100%
+
+.chat__search
+  display: flex
+  align-items: center
+  width: 100%
+  height: 50px
+  border-bottom: 1px solid #f5f6f9
+
+.search__item
+  width: 100%
+  margin-left: 22px
+
+.search__input
+  width: 80%
+  margin-left: 22px
+  border: 0
+  outline: none
+  font-family: $Roboto
+  font-size: 14px
+
+.chat__mails
+  display: flex
+  flex-direction: column
+  flex-grow: 1
+  flex-wrap: nowrap
+  height: 446px
+  overflow: auto
+
+.dialogue__message
+  display: flex
+  flex-shrink: 5
+  margin-top: 15px
+
+.dialogue__message--another img
+  align-self: flex-end
+  width: 36px
+  height: 36px
+  margin-right: 11px
+  margin-left: 21px
+  object-fit: contain
+
+.dialogue__message .message__wrap
+  display: flex
+  position: relative
+  width: 54.24%
+  border-radius: 5px
+  background: #f7f9fc
+  line-height: 20px
+
+.dialogue__message--another .message__wrap::before
+  position: absolute
+  bottom: 0
+  left: -9px
+  width: 10px
+  height: 10px
+  transform: rotate(-10deg)
+  background: linear-gradient(-45deg, #f7f9fc 50%, #fff 50%)
+  content: ""
+
+.dialogue__message--user
+  // align-self: flex-end
+  justify-content: flex-end
+  margin-right: 46px
+  .message__wrap::after
+    position: absolute
+    right: -9px
+    bottom: 0
+    width: 10px
+    height: 10px
+    transform: rotate(10deg)
+    background: linear-gradient(45deg, #f7f9fc 50%, #fff 50%)
+    content: ""
+
+.message__wrap-text
+  width: 76.6%
+  padding: 11px 0 12px 14px
+  color: $grayDark
+  line-height: 20px
+
+.message__wrap-time
+  position: absolute
+  right: 10px
+  bottom: 12px
+  color: $grayTime
+  font-size: 12px
+  letter-spacing: 0.428571px
+
+.chat__send
+  display: flex
+  align-items: center
+  height: 60px
+  box-shadow: 0 0 20px rgba(153, 163, 174, 0.14654)
+
+.write__text
+  flex-grow: 1
+  width: auto
+  margin-left: 22px
+  padding-top: 20px
+  border: 0
+  outline: none
+  font-family: $Roboto
+  font-size: 14px
+  resize: none
+
+.write__item
+  &:last-child
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 35px
+    height: 35px
+    margin-right: 20px
+    border-radius: 7px
+    box-shadow: 0 0 15px rgba(153, 163, 174, 0.25926)
+    &:hover
+      transition: 1s ease
+      box-shadow: 0 0 58px -2px rgba(0, 0, 0, 0.75)
+  margin-left: 2%
+  cursor: pointer
+  
+.chat__mails
+  &::-webkit-scrollbar
+    width: 8px
+  &::-webkit-scrollbar-track
+    border-radius: 4px
+    background: rgba(56, 68, 99, 0.05)
+  &::-webkit-scrollbar-thumb
+    border-radius: 4px
+    background: rgba(19, 66, 189, 0.1)
+
