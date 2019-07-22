@@ -47,28 +47,31 @@ exports.personInfoPage = async (ctx) => {
   });
 };
 exports.searchPage = async (ctx) => {
+  let people = await User.find({})
+  // console.log(people);
   await ctx.render('search.njk', {
     title: 'Search',
-    people: [
-      {
-        img: './img/search/people1.png', name: 'Richard Thompson', rating: 'gold', country: 'Vancouver, Canada', skills: 'Python, Django, Sketch', price: '$ 1,200 USD',
-      },
-      {
-        img: './img/search/people2.png', name: 'Ivana Pupkina', rating: 'gold', country: 'Vancouver, Canada', skills: 'Django,Python, Sketch', price: '$ 1,000 USD',
-      },
-      {
-        img: './img/search/people3.png', name: 'Pupkina Anastasia', rating: 'bronze', country: 'Vancouver, Canada', skills: 'NodeJs, AngularJs', price: '$ 1,300 USD',
-      },
-      {
-        img: './img/search/people4.png', name: 'Richard Thompson', rating: 'none', country: 'Vancouver, Canada', skills: 'VueJs, React Native, QA', price: '$ 1,500 USD',
-      },
-      {
-        img: './img/search/people5.png', name: 'Richard Thompson', rating: 'gold', country: 'Vancouver, Canada', skills: 'Php, Smesitel', price: '$ 900 USD',
-      },
-      {
-        img: './img/search/people5.png', name: 'Richard Thompson', rating: 'silver', country: 'Vancouver, Canada', skills: 'Stack: React, jQuery', price: '$ 700 USD',
-      },
-    ],
+    people,
+    // people: [
+    //   {
+    //     img: './img/search/people1.png', name: 'Richard Thompson', rating: 'gold', country: 'Vancouver, Canada', skills: 'Python, Django, Sketch', price: '$ 1,200 USD',
+    //   },
+    //   {
+    //     img: './img/search/people2.png', name: 'Ivana Pupkina', rating: 'gold', country: 'Vancouver, Canada', skills: 'Django,Python, Sketch', price: '$ 1,000 USD',
+    //   },
+    //   {
+    //     img: './img/search/people3.png', name: 'Pupkina Anastasia', rating: 'bronze', country: 'Vancouver, Canada', skills: 'NodeJs, AngularJs', price: '$ 1,300 USD',
+    //   },
+    //   {
+    //     img: './img/search/people4.png', name: 'Richard Thompson', rating: 'none', country: 'Vancouver, Canada', skills: 'VueJs, React Native, QA', price: '$ 1,500 USD',
+    //   },
+    //   {
+    //     img: './img/search/people5.png', name: 'Richard Thompson', rating: 'gold', country: 'Vancouver, Canada', skills: 'Php, Smesitel', price: '$ 900 USD',
+    //   },
+    //   {
+    //     img: './img/search/people5.png', name: 'Richard Thompson', rating: 'silver', country: 'Vancouver, Canada', skills: 'Stack: React, jQuery', price: '$ 700 USD',
+    //   },
+    // ],
   });
 };
 exports.messengerPage = async (ctx) => {
@@ -91,3 +94,51 @@ exports.messengerPage = async (ctx) => {
     messageUser: [{ text: 'Which is the same as saying?', time: '01:38' }, { text: 'To take a trivial example, which of us ever undertakes)', time: '03:25' }, { text: 'To take a trivial example, which of us ever undertakes)', time: '03:25' }],
   });
 };
+const User = require('./models/category');
+
+exports.createProfile = async ctx =>{
+  const body = ctx.request.body;
+  const user = new User({
+    name: body.name,
+    img: body.img,
+    rating: body.rating,
+    country: body.country,
+    skills: body.skills,
+    price: body.price
+  })
+  await user.save()
+
+  console.log(user)
+  ctx.body = {
+    create: true
+  }
+}
+exports.deleteProfile = async ctx => {
+  await User.findByIdAndDelete(ctx.params.profileId)
+  ctx.body = {
+    remove: true
+  }
+}
+exports.singleProfile = async (ctx) => {
+  let people = await User.find({_id:ctx.params.profileId})
+  await ctx.render('search.njk', {
+    title: 'Search',
+    people,
+  });
+};
+exports.updateProfile = async (ctx) => {
+  const body = ctx.request.body;
+  console.log(body);
+  const def = await User.findById(ctx.params.profileId)
+  await User.findByIdAndUpdate(ctx.params.profileId,{
+    name: body.name?body.name:def.name,
+    img: body.img?body.img:def.img,
+    rating: body.rating?body.rating:def.rating,
+    country: body.country?body.country:def.country,
+    skills: body.skills?body.skills:def.skills,
+    price: body.price?body.price:def.price
+  });
+  ctx.body = {
+    update: true
+  }
+}

@@ -3,10 +3,17 @@ const path = require('path');
 const views = require('koa-views');
 const Router = require('koa-router');
 const serve = require('koa-static');
-// const sass = require('node-sass');
+const body = require('koa-body');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/user', {useNewUrlParser: true});
 
 const app = new Koa();
 const router = new Router();
+
+app.use(body({
+  multipart: true
+}));
 
 app.use(views(path.join(__dirname, '/app/template'), {
   extension: 'njk',
