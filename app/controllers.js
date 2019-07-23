@@ -47,7 +47,7 @@ exports.personInfoPage = async (ctx) => {
   });
 };
 exports.searchPage = async (ctx) => {
-  let people = await User.find({})
+  const people = await User.find({});
   // console.log(people);
   await ctx.render('search.njk', {
     title: 'Search',
@@ -96,49 +96,50 @@ exports.messengerPage = async (ctx) => {
 };
 const User = require('./models/category');
 
-exports.createProfile = async ctx =>{
-  const body = ctx.request.body;
+exports.createProfile = async (ctx) => {
+  const { body } = ctx.request;
+  const file = ctx.request.body.file
   const user = new User({
     name: body.name,
     img: body.img,
     rating: body.rating,
     country: body.country,
     skills: body.skills,
-    price: body.price
-  })
-  await user.save()
-
-  console.log(user)
+    price: body.price,
+  });
+  await user.save();
+  console.log(file)
+  // console.log(user);
   ctx.body = {
-    create: true
-  }
-}
-exports.deleteProfile = async ctx => {
-  await User.findByIdAndDelete(ctx.params.profileId)
+    create: true,
+  };
+};
+exports.deleteProfile = async (ctx) => {
+  await User.findByIdAndDelete(ctx.params.profileId);
   ctx.body = {
-    remove: true
-  }
-}
+    remove: true,
+  };
+};
 exports.singleProfile = async (ctx) => {
-  let people = await User.find({_id:ctx.params.profileId})
+  const people = await User.find({ _id: ctx.params.profileId });
   await ctx.render('search.njk', {
     title: 'Search',
     people,
   });
 };
 exports.updateProfile = async (ctx) => {
-  const body = ctx.request.body;
+  const { body } = ctx.request;
   console.log(body);
-  const def = await User.findById(ctx.params.profileId)
-  await User.findByIdAndUpdate(ctx.params.profileId,{
-    name: body.name?body.name:def.name,
-    img: body.img?body.img:def.img,
-    rating: body.rating?body.rating:def.rating,
-    country: body.country?body.country:def.country,
-    skills: body.skills?body.skills:def.skills,
-    price: body.price?body.price:def.price
+  const def = await User.findById(ctx.params.profileId);
+  await User.findByIdAndUpdate(ctx.params.profileId, {
+    name: body.name ? body.name : def.name,
+    img: body.img ? body.img : def.img,
+    rating: body.rating ? body.rating : def.rating,
+    country: body.country ? body.country : def.country,
+    skills: body.skills ? body.skills : def.skills,
+    price: body.price ? body.price : def.price,
   });
   ctx.body = {
-    update: true
-  }
-}
+    update: true,
+  };
+};
