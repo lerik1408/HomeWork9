@@ -1,3 +1,5 @@
+const User = require('./models/user');
+
 exports.homePage = async (ctx) => {
   await ctx.render('index.njk');
 };
@@ -94,11 +96,9 @@ exports.messengerPage = async (ctx) => {
     messageUser: [{ text: 'Which is the same as saying?', time: '01:38' }, { text: 'To take a trivial example, which of us ever undertakes)', time: '03:25' }, { text: 'To take a trivial example, which of us ever undertakes)', time: '03:25' }],
   });
 };
-const User = require('./models/category');
 
 exports.createProfile = async (ctx) => {
   const { body } = ctx.request;
-  const file = ctx.request.body.file
   const user = new User({
     name: body.name,
     img: body.img,
@@ -108,8 +108,6 @@ exports.createProfile = async (ctx) => {
     price: body.price,
   });
   await user.save();
-  console.log(file)
-  // console.log(user);
   ctx.body = {
     create: true,
   };
@@ -129,7 +127,6 @@ exports.singleProfile = async (ctx) => {
 };
 exports.updateProfile = async (ctx) => {
   const { body } = ctx.request;
-  console.log(body);
   const def = await User.findById(ctx.params.profileId);
   await User.findByIdAndUpdate(ctx.params.profileId, {
     name: body.name ? body.name : def.name,

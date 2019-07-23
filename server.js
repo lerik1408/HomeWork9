@@ -7,13 +7,15 @@ const body = require('koa-body');
 const mongoose = require('mongoose');
 
 // mongoose.connect('mongodb://localhost:27017/user', {useNewUrlParser: true});
-mongoose.connect('mongodb+srv://lerik1408:Okf123fu@cluster0-osbtr.gcp.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://lerik1408:Okf123fu@cluster0-osbtr.gcp.mongodb.net/test?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+});
 
 const app = new Koa();
 const router = new Router();
 
 app.use(body({
-  multipart: true
+  multipart: true,
 }));
 
 app.use(views(path.join(__dirname, '/app/template'), {
