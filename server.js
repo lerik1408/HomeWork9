@@ -33,16 +33,22 @@ app.use(async (ctx, next) => {
   try {
     await next();
   } catch (err) {
-    let errors = [];
+    const errors = [];
     Object.keys(err.errors).forEach((key) => {
-      errors.push(err.errors[key].message);
+      if (err.errors[key].kind === 'Number') {
+        errors.push(`The cell ${key} must be a number.`);
+      } else if (err.errors[key].kind === 'unique') {
+        errors.push(`The field ${key} is already taken by this value. Please enter another value`);
+      } else {
+        errors.push(err.errors[key].message);
+      }
     });
     ctx.status = 500;
     ctx.body = {
       error: errors,
     };
   }
-})
+});
 app.use(serve(path.join(__dirname, '/app/public')));
 router.use('/', require('./app/router').routes());
 

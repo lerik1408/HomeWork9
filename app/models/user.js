@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   rating: String,
   country: String,
   skills: String,
-  price: String,
+  price: Number,
   phone: {
     type: Number,
     unique: true,

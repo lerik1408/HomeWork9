@@ -48,27 +48,6 @@ exports.siginUp2Page = async (ctx) => {
     title: 'Sigin Up 2',
   });
 };
-exports.accInfoPage = async (ctx) => {
-  await ctx.render('accInfo.njk', {
-    title: 'Account information',
-  });
-};
-exports.personInfoPage = async (ctx) => {
-  const user = await User.findById('5d382da96ca5802ac0a06b06');
-  const fullName = parceName(user);
-  await ctx.render('personInfo.njk', {
-    title: 'Person information',
-    people: user,
-    fullName,
-  });
-};
-exports.searchPage = async (ctx) => {
-  const people = await User.find({});
-  await ctx.render('search.njk', {
-    title: 'Search',
-    people,
-  });
-};
 exports.messengerPage = async (ctx) => {
   await ctx.render('messenger.njk', {
     title: 'Messenger',
@@ -89,7 +68,41 @@ exports.messengerPage = async (ctx) => {
     messageUser: [{ text: 'Which is the same as saying?', time: '01:38' }, { text: 'To take a trivial example, which of us ever undertakes)', time: '03:25' }, { text: 'To take a trivial example, which of us ever undertakes)', time: '03:25' }],
   });
 };
-
+exports.accInfoPage = async (ctx) => {
+  await ctx.render('accInfo.njk', {
+    title: 'Account information',
+  });
+};
+exports.personInfoPage = async (ctx) => {
+  const user = await User.findById('5d382da96ca5802ac0a06b06');
+  const fullName = parceName(user);
+  await ctx.render('personInfo.njk', {
+    title: 'Person information',
+    people: user,
+    fullName,
+  });
+};
+exports.searchPage = async (ctx) => {
+  const allPeople = await User.find({});
+  const amountPage = await Math.ceil(allPeople.length / 6);
+  const fixedSampling = await User.find({}).limit(6);
+  await ctx.render('search.njk', {
+    title: 'Search',
+    people: fixedSampling,
+    amountPage,
+  });
+};
+exports.searchIdPage = async (ctx) => {
+  const allPeople = await User.find({});
+  const amountPage = await Math.ceil(allPeople.length / 6);
+  const id = await ctx.params.searchId;
+  const fixedSampling = await User.find({}).limit(6).skip((id - 1) * 6);
+  await ctx.render('search.njk', {
+    title: 'Search',
+    people: fixedSampling,
+    amountPage,
+  });
+};
 exports.createProfile = async (ctx) => {
   const { body } = ctx.request;
   const user = new User({
@@ -126,14 +139,12 @@ exports.singleProfile = async (ctx) => {
 exports.updateProfile = async (ctx) => {
   const { body } = ctx.request;
   const updateKey = {};
-  for (const key in body) {
-    if (!body[key] === '') {
+  Object.keys(body).forEach((key) => {
+    if (body[key] !== '') {
       updateKey[key] = body[key];
     }
-  }
-
+  });
   await User.findByIdAndUpdate(ctx.params.profileId, updateKey);
-
   ctx.body = {
     update: true,
   };

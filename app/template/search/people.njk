@@ -13,4 +13,9 @@
             {{macro.people(user)}}
         {%endfor%}
     </div>
+    <div class="pagination">
+    {% for i in range(1, amountPage+1) -%}
+        <a href={{'/search/' + i}} class="pagination__link">{{ i }}</a>
+    {%- endfor %}
+    </div>
 </div>

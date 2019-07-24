@@ -14,8 +14,10 @@ router.get('sigin-up1', ctrl.siginUp1Page);
 router.get('sigin-up2', ctrl.siginUp2Page);
 router.get('acc-info', ctrl.accInfoPage);
 router.get('person-info', ctrl.personInfoPage);
-router.get('search', ctrl.searchPage);
 router.get('messenger', ctrl.messengerPage);
+
+router.get('search', ctrl.searchPage);
+router.get('search/:searchId', ctrl.searchIdPage);
 
 router.post('profile', ctrl.createProfile);
 router.get('profile/:profileId', ctrl.singleProfile);
