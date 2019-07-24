@@ -1,5 +1,15 @@
 const User = require('./models/user');
 
+function parceName(body) {
+  const firstName = body.name.split(' ')[0];
+  const lastName = body.name.split(' ')[1];
+  const result = {
+    firstName,
+    lastName,
+  };
+  return result;
+}
+
 exports.homePage = async (ctx) => {
   await ctx.render('index.njk');
 };
@@ -44,36 +54,19 @@ exports.accInfoPage = async (ctx) => {
   });
 };
 exports.personInfoPage = async (ctx) => {
+  const user = await User.findById('5d382da96ca5802ac0a06b06');
+  const fullName = parceName(user);
   await ctx.render('personInfo.njk', {
     title: 'Person information',
+    people: user,
+    fullName,
   });
 };
 exports.searchPage = async (ctx) => {
   const people = await User.find({});
-  // console.log(people);
   await ctx.render('search.njk', {
     title: 'Search',
     people,
-    // people: [
-    //   {
-    //     img: './img/search/people1.png', name: 'Richard Thompson', rating: 'gold', country: 'Vancouver, Canada', skills: 'Python, Django, Sketch', price: '$ 1,200 USD',
-    //   },
-    //   {
-    //     img: './img/search/people2.png', name: 'Ivana Pupkina', rating: 'gold', country: 'Vancouver, Canada', skills: 'Django,Python, Sketch', price: '$ 1,000 USD',
-    //   },
-    //   {
-    //     img: './img/search/people3.png', name: 'Pupkina Anastasia', rating: 'bronze', country: 'Vancouver, Canada', skills: 'NodeJs, AngularJs', price: '$ 1,300 USD',
-    //   },
-    //   {
-    //     img: './img/search/people4.png', name: 'Richard Thompson', rating: 'none', country: 'Vancouver, Canada', skills: 'VueJs, React Native, QA', price: '$ 1,500 USD',
-    //   },
-    //   {
-    //     img: './img/search/people5.png', name: 'Richard Thompson', rating: 'gold', country: 'Vancouver, Canada', skills: 'Php, Smesitel', price: '$ 900 USD',
-    //   },
-    //   {
-    //     img: './img/search/people5.png', name: 'Richard Thompson', rating: 'silver', country: 'Vancouver, Canada', skills: 'Stack: React, jQuery', price: '$ 700 USD',
-    //   },
-    // ],
   });
 };
 exports.messengerPage = async (ctx) => {
@@ -102,6 +95,9 @@ exports.createProfile = async (ctx) => {
   const user = new User({
     name: body.name,
     img: body.img,
+    gender: body.gender,
+    phone: body.phone,
+    company: body.company,
     rating: body.rating,
     country: body.country,
     skills: body.skills,
@@ -119,23 +115,34 @@ exports.deleteProfile = async (ctx) => {
   };
 };
 exports.singleProfile = async (ctx) => {
-  const people = await User.find({ _id: ctx.params.profileId });
-  await ctx.render('search.njk', {
+  const people = await User.findById(ctx.params.profileId);
+  const fullName = parceName(people);
+  await ctx.render('personInfo.njk', {
     title: 'Search',
     people,
+    fullName,
   });
 };
 exports.updateProfile = async (ctx) => {
   const { body } = ctx.request;
-  const def = await User.findById(ctx.params.profileId);
-  await User.findByIdAndUpdate(ctx.params.profileId, {
-    name: body.name ? body.name : def.name,
-    img: body.img ? body.img : def.img,
-    rating: body.rating ? body.rating : def.rating,
-    country: body.country ? body.country : def.country,
-    skills: body.skills ? body.skills : def.skills,
-    price: body.price ? body.price : def.price,
-  });
+  const updateKey = {};
+  for (const key in body) {
+    if (!body[key] === '') {
+      updateKey[key] = body[key];
+    }
+  }
+
+  await User.findByIdAndUpdate(ctx.params.profileId, updateKey);
+
+  // const def = await User.findById(ctx.params.profileId);
+  // await User.findByIdAndUpdate(ctx.params.profileId, {
+  //   name: body.name ? body.name : def.name,
+  //   img: body.img ? body.img : def.img,
+  //   rating: body.rating ? body.rating : def.rating,
+  //   country: body.country ? body.country : def.country,
+  //   skills: body.skills ? body.skills : def.skills,
+  //   price: body.price ? body.price : def.price,
+  // });
   ctx.body = {
     update: true,
   };

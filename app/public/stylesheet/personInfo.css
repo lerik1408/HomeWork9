@@ -255,6 +255,10 @@ body {
       align-items: center;
       margin: 30px 10px; } }
 
+.profile__photo img {
+  width: 134px;
+  height: 134px; }
+
 @media screen and (max-width: 768px) {
   .profile__photo {
     order: 2; } }
@@ -323,4 +327,3 @@ body {
 .form__input--phone {
   width: 60%;
   margin-left: 5%; }
-

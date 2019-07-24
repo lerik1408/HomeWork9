@@ -18,8 +18,8 @@ router.get('search', ctrl.searchPage);
 router.get('messenger', ctrl.messengerPage);
 
 router.post('search', ctrl.createProfile);
-router.get('search-id-:profileId', ctrl.singleProfile);
-router.delete('search-id-:profileId', ctrl.deleteProfile);
-router.put('search-id-:profileId', ctrl.updateProfile);
+router.get('profile/:profileId', ctrl.singleProfile);
+router.delete('profile/:profileId', ctrl.deleteProfile);
+router.put('profile/:profileId', ctrl.updateProfile);
 
 module.exports = router;

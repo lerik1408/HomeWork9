@@ -1,7 +1,7 @@
 {% set title = "Person information" %}
 {% extends "./app/template/profile/base.njk" %}
 {%block link%}
-    <link rel="stylesheet" href="./stylesheet/personInfo.css">
+    <link rel="stylesheet" href="/stylesheet/personInfo.css">
 {%endblock%}
 {%block content%}
     <main class="main">
@@ -9,7 +9,7 @@
             {%include "./app/template/profile/nav.njk"%}
             <section class="profile">
                 <div class="profile__photo">
-                    <img src="img/profile/profile.png" alt="your photo">
+                    <img src={{people.img}} alt="profile_img">
                     <div class="profile__link">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M6.62408 2.49908L8.98063 4.14914L4.80382 10.1143L2.4484 8.46399L6.62408 2.49908ZM10.0623 1.39465L9.0114 0.658776C8.60525 0.374386 8.04461 0.473243 7.75904 0.879601L7.05415 1.88629L9.41071 3.53637L10.2329 2.36212C10.4535 2.04709 10.3773 1.61522 10.0623 1.39465ZM1.89652 11.4646C1.889 11.6352 2.06306 11.7561 2.22012 11.6872L4.35705 10.7523L2.00163 9.10207L1.89652 11.4646Z" fill="#2A74DB"/>
@@ -21,18 +21,18 @@
                     <div class="form__wrap">
                         <label for="" class="form__label">First name
                         </label>
-                        <input type="text" id="name" class="form__input">
+                        <input type="text" id="name" class="form__input" value={{fullName.firstName}}>
                     </div>
                     <div class="form__wrap">
                         <label for="surname" class="form__label">Last name
                         </label>
-                        <input type="text" id="surname" class="form__input">
+                        <input type="text" id="surname" class="form__input" value={{fullName.lastName}}>
                     </div>
                     <div class="form__wrap">
                         <label for="" class="form__label">Title
                         </label>
                         <select class="form__select">
-                            <option>Пункт 1</option>
+                            <option>{{people.gender}}</option>
                             <option>Пункт 2</option>
                         </select>
                     </div>
@@ -44,19 +44,19 @@
                             <option><img src="img/profile/flag/singapur.png" alt="" srcset=""></option>
                             <option>Пункт 2</option>
                         </select>
-                        <input type="text" class="form__input form__input--phone">
+                        <input type="text" class="form__input form__input--phone" value={{people.phone}}>
                         </div>
                     </div>
                         <div class="form__wrap">
                             <label for="" class="form__label">Country</label>
                             <select class="form__select form__select--country">
-                                <option>Пункт 1</option>
+                                <option>{{people.country}}</option>
                                 <option>Пункт 2</option>
                             </select>
                     </div>
                     <div class="form__wrap">
                         <label for="" class="form__label">Company</label>
-                        <input type="text" id="company" class="form__input">
+                        <input type="text" id="company" class="form__input" value={{people.company}}>
                     </div>
                 </form>
             </section>
