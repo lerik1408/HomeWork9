@@ -17,7 +17,7 @@ router.get('person-info', ctrl.personInfoPage);
 router.get('search', ctrl.searchPage);
 router.get('messenger', ctrl.messengerPage);
 
-router.post('search', ctrl.createProfile);
+router.post('profile', ctrl.createProfile);
 router.get('profile/:profileId', ctrl.singleProfile);
 router.delete('profile/:profileId', ctrl.deleteProfile);
 router.put('profile/:profileId', ctrl.updateProfile);

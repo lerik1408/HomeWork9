@@ -8,10 +8,13 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost:27017/user', {
   useNewUrlParser: true,
+  useCreateIndex: true,
 });
 // mongoose.connect('mongodb+srv://lerik1408:Okf123fu@cluster0-osbtr.gcp.mongodb.net/test?retryWrites=true&w=majority', {
 //   useNewUrlParser: true,
+//   useCreateIndex: true,
 // });
+
 
 const app = new Koa();
 const router = new Router();
@@ -26,7 +29,20 @@ app.use(views(path.join(__dirname, '/app/template'), {
     njk: 'nunjucks',
   },
 }));
-
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    let errors = [];
+    Object.keys(err.errors).forEach((key) => {
+      errors.push(err.errors[key].message);
+    });
+    ctx.status = 500;
+    ctx.body = {
+      error: errors,
+    };
+  }
+})
 app.use(serve(path.join(__dirname, '/app/public')));
 router.use('/', require('./app/router').routes());
 

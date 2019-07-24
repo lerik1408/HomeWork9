@@ -134,15 +134,6 @@ exports.updateProfile = async (ctx) => {
 
   await User.findByIdAndUpdate(ctx.params.profileId, updateKey);
 
-  // const def = await User.findById(ctx.params.profileId);
-  // await User.findByIdAndUpdate(ctx.params.profileId, {
-  //   name: body.name ? body.name : def.name,
-  //   img: body.img ? body.img : def.img,
-  //   rating: body.rating ? body.rating : def.rating,
-  //   country: body.country ? body.country : def.country,
-  //   skills: body.skills ? body.skills : def.skills,
-  //   price: body.price ? body.price : def.price,
-  // });
   ctx.body = {
     update: true,
   };
