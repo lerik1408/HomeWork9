@@ -74,7 +74,17 @@ exports.accInfoPage = async (ctx) => {
   });
 };
 exports.personInfoPage = async (ctx) => {
-  const user = await User.findById('5d382da96ca5802ac0a06b06');
+  const user = await User.findById('5d397323d121ec1e68e767d4');
+  const fullName = parceName(user);
+  await ctx.render('personInfo.njk', {
+    title: 'Person information',
+    people: user,
+    fullName,
+  });
+};
+exports.personIdInfoPage = async (ctx) => {
+  const id = await ctx.params.personId;
+  const user = await User.findById(id);
   const fullName = parceName(user);
   await ctx.render('personInfo.njk', {
     title: 'Person information',
@@ -96,11 +106,49 @@ exports.searchIdPage = async (ctx) => {
   const allPeople = await User.find({});
   const amountPage = await Math.ceil(allPeople.length / 6);
   const id = await ctx.params.searchId;
-  const fixedSampling = await User.find({}).limit(6).skip((id - 1) * 6);
+  const peopleInPage = await User.find({}).limit(6).skip((id - 1) * 6);
   await ctx.render('search.njk', {
     title: 'Search',
-    people: fixedSampling,
+    people: peopleInPage,
     amountPage,
+  });
+};
+exports.searchName = async (ctx) => {
+  const name = await ctx.params.name;
+  const peopleInPage = await User.find({
+    $or: [
+      {
+        name: {
+          $regex: name,
+          $options: 'i',
+        },
+      },
+    ],
+  });
+  await ctx.render('search.njk', {
+    title: 'Search',
+    people: peopleInPage,
+  });
+};
+exports.searchPageByprice = async (ctx) => {
+  const peopleSort = await User.find({}).sort({ price: 1 });
+  await ctx.render('search.njk', {
+    title: 'Search',
+    people: peopleSort,
+  });
+};
+exports.searchPageByrating = async (ctx) => {
+  const peopleSort = await User.find({}).sort({ rating: -1 });
+  await ctx.render('search.njk', {
+    title: 'Search',
+    people: peopleSort,
+  });
+};
+exports.searchPageByratingPrice = async (ctx) => {
+  const peopleSort = await User.find({}).sort({ rating: -1, price: 1 });
+  await ctx.render('search.njk', {
+    title: 'Search',
+    people: peopleSort,
   });
 };
 exports.createProfile = async (ctx) => {
@@ -131,7 +179,7 @@ exports.singleProfile = async (ctx) => {
   const people = await User.findById(ctx.params.profileId);
   const fullName = parceName(people);
   await ctx.render('personInfo.njk', {
-    title: 'Search',
+    title: 'Profile',
     people,
     fullName,
   });

@@ -13,10 +13,16 @@ router.get('sigin-up', ctrl.siginUpPage);
 router.get('sigin-up1', ctrl.siginUp1Page);
 router.get('sigin-up2', ctrl.siginUp2Page);
 router.get('acc-info', ctrl.accInfoPage);
-router.get('person-info', ctrl.personInfoPage);
 router.get('messenger', ctrl.messengerPage);
 
+router.get('person-info', ctrl.personInfoPage);
+router.get('person-info/:personId', ctrl.personIdInfoPage);
+
 router.get('search', ctrl.searchPage);
+router.get('search/price', ctrl.searchPageByprice);
+router.get('search/rating', ctrl.searchPageByrating);
+router.get('search/rating-price', ctrl.searchPageByratingPrice);
+router.get('search/name/:name', ctrl.searchName);
 router.get('search/:searchId', ctrl.searchIdPage);
 
 router.post('profile', ctrl.createProfile);
