@@ -197,3 +197,8 @@ exports.updateProfile = async (ctx) => {
     update: true,
   };
 };
+exports.map = async (ctx) => {
+  await ctx.render('map.njk', {
+    title: 'Map',
+  });
+};

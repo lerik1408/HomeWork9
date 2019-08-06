@@ -1,0 +1,69 @@
+main
+    display: flex
+    margin-left: 80px
+    background-color: $grayMain
+    @include respond_tablet
+        margin-left: 0
+
+.main__wrap
+    display: flex
+    width: 90%
+    height: 556px
+    margin: auto
+    margin-top: 25px
+    border-radius: 4px
+    background-color: #fff
+    box-shadow: 0 0 30px rgba(153, 163, 174, 0.06)
+    @include respond_bigTablet
+        width: 100%
+    @include respond_tablet
+        width: 97%
+        flex-direction: column
+.form
+    display: flex
+    width: 29%
+    margin-top: 40px
+    margin-left: 45px
+    flex-wrap: wrap
+    flex-direction: column
+    border-right: 1px solid #E7EAF5
+    box-shadow: 20px 0px 20px -15px rgba(85, 85, 85, 0.25)
+    @include respond_tablet
+        width: 100%
+        box-shadow: none
+        border: none
+        align-items: center
+        margin-left: 0
+.form__wrap
+    display: flex
+    flex-direction: column
+    width: 74%
+    margin-bottom: 20px
+    // @include respond_tablet
+.form__label
+    margin-bottom: 5px
+    font-weight: 500
+    font-size: 12px
+    line-height: 14px
+    letter-spacing: 1px
+    text-transform: uppercase
+    color: $violet
+.form__select,
+.form__input
+    background: #FCFCFC
+    border: 2px solid $grayInput
+    border-radius: 2px
+    height: 45px
+    outline: none
+    padding-left: 13px
+.form__button
+    width: 74%
+    height: 42px
+    background-color: $lightGreen
+    font-size: 16px
+    font-family: $eho
+    color: #fff
+    border: none
+    border-radius: 2px
+    cursor: pointer
+    margin-top: 14px

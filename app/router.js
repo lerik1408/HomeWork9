@@ -30,4 +30,5 @@ router.get('profile/:profileId', ctrl.singleProfile);
 router.delete('profile/:profileId', ctrl.deleteProfile);
 router.put('profile/:profileId', ctrl.updateProfile);
 
+router.get('map', ctrl.map);
 module.exports = router;
